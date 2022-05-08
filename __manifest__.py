@@ -14,7 +14,7 @@
     'author': "Teplyuk",
     'website': "",
 
-    # Categories can be used to filter modules in modules listing
+    # Categories can be used to filter modules in modules listing m2
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
     'category': 'Test',
