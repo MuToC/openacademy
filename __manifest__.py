@@ -11,7 +11,7 @@
             - attendees registration
     """,
 
-    'author': "Teplyuk",
+    'author': "Teplyuk/DM",
     'website': "",
 
     # Categories can be used to filter modules in modules listing m2
