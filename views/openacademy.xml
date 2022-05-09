@@ -164,9 +164,9 @@
     <!--    <field name="view_mode">tree,form,calendar,gantt</field>-->
     <record model="ir.actions.act_window" id="session_list_action">
         <field name="name">Sessions</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">tree,form,calendar</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_smiling_face">
@@ -193,7 +193,7 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="Open Academy22" id="main_openacademy_menu"/>
+    <menuitem name="Open Academy" id="main_openacademy_menu"/>
 
     <!-- menu categories -->
     <!-- A first level in the left side menu is needed
@@ -209,7 +209,7 @@
     <!-- the following menuitem should appear *after*
          its parent openacademy_menu and *after* its
          action session_list_action -->
-    <menuitem name="Sessions" id="session_menu" parent="openacademy_menu"
+    <menuitem name="Sessions" id="session_menu" parent="main_openacademy_menu"
               action="session_list_action"/>
     <!--
     <menuitem name="Server to list" id="openacademy" parent="openacademy.menu_2"
