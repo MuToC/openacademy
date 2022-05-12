@@ -127,18 +127,59 @@
         </field>
     </record>
 
-     session gantt view
-        <record model="ir.ui.view" id="session_gantt_view">
-          <field name="name">session.gantt</field>
-          <field name="model">openacademy.session</field>
-          <field name="arch" type="xml">
+    <!-- session graph view-->
+    <record id="session_graph_view" model="ir.ui.view">
+        <field name="name">session.graph</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <graph string="Session Graph" sample="1">
+                <field name="duration"/>
+                <field name="start_date"/>
+                <field name="end_date" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- session gantt view-->
+    <record model="ir.ui.view" id="session_gantt_view">
+        <field name="name">session.gantt</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
             <gantt string="Session Gantt" color="course_id"
                    date_start="start_date" date_delay="hours"
                    default_group_by='instructor_id'>
-              <field name="name"/>
+                <field name="name"/>
             </gantt>
-            </field>
-        </record>
+        </field>
+    </record>
+
+    <!-- session kanban view-->
+    <record id="session_kanban_view" model="ir.ui.view">
+        <field name="name">session.kanban</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="col-6">
+                                    <span class="float-right">
+                                        <field name="course_id"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
 
 
     <!-- actions opening views on models -->
@@ -154,11 +195,11 @@
           </field>
         </record>
 
-    <!--    <field name="view_mode">tree,form,calendar,gantt</field>-->
+    <!--    <field name="view_mode">tree,form,calendar,gantt - not work</field>-->
     <record model="ir.actions.act_window" id="session_list_action">
         <field name="name">Sessions</field>
         <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree,form,calendar,gantt</field>
+        <field name="view_mode">tree,form,calendar,gantt,graph,kanban</field>
         <field name="type">ir.actions.act_window</field>
         <field name="context">{}</field>
         <field name="help" type="html">
