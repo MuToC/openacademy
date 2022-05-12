@@ -91,13 +91,22 @@
         </field>
     </record>
 
-    <!-- session tree/list view -->
+
     <!--    <tree string="Session Tree" colors="#0000ff:duration&lt;5;red:duration&gt;15">-->
+    <!--    decoration-it – shows the row in ITALICS-->
+    <!--    decoration-bf – shows the row in BOLD-->
+    <!--    decoration-danger – shows the row in LIGHT RED-->
+    <!--    decoration-primary – shows the row in LIGHT PURPLE-->
+    <!--    decoration-info – shows the row in LIGHT BLUE-->
+    <!--    decoration-warning – shows the row in LIGHT BROWN-->
+    <!--    decoration-muted – shows the row in LIGHT GRAY-->
+    <!--    decoration-success – shows the row in LIGHT GREEN-->
+    <!-- session tree/list view -->
     <record model="ir.ui.view" id="session_tree_view">
         <field name="name">session.tree</field>
         <field name="model">openacademy.session</field>
         <field name="arch" type="xml">
-            <tree string="Session Tree">
+            <tree string="Session Tree" decoration-info="duration &lt; 5" decoration-danger="duration &gt; 15">
                 <field name="name"/>
                 <field name="course_id"/>
                 <field name="duration" invisible="1"/>
@@ -118,18 +127,18 @@
         </field>
     </record>
 
-    <!-- session gantt view -->
-    <!--    <record model="ir.ui.view" id="session_gantt_view">-->
-    <!--      <field name="name">session.gantt</field>-->
-    <!--      <field name="model">openacademy.session</field>-->
-    <!--      <field name="arch" type="xml">-->
-    <!--        <gantt string="Session Gantt" color="course_id"-->
-    <!--               date_start="start_date" date_delay="hours"-->
-    <!--               default_group_by='instructor_id'>-->
-    <!--          <field name="name"/>-->
-    <!--        </gantt>-->
-    <!--        </field>-->
-    <!--    </record>-->
+     session gantt view
+        <record model="ir.ui.view" id="session_gantt_view">
+          <field name="name">session.gantt</field>
+          <field name="model">openacademy.session</field>
+          <field name="arch" type="xml">
+            <gantt string="Session Gantt" color="course_id"
+                   date_start="start_date" date_delay="hours"
+                   default_group_by='instructor_id'>
+              <field name="name"/>
+            </gantt>
+            </field>
+        </record>
 
 
     <!-- actions opening views on models -->
@@ -149,7 +158,7 @@
     <record model="ir.actions.act_window" id="session_list_action">
         <field name="name">Sessions</field>
         <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">tree,form,calendar,gantt</field>
         <field name="type">ir.actions.act_window</field>
         <field name="context">{}</field>
         <field name="help" type="html">
