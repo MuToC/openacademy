@@ -7,19 +7,74 @@
             <field name="sequence" eval="1"/>
         </record>
 
-        <record id="group_openacademy_session" model="res.groups">
-            <field name="name">OpenAcademy Group - Session</field>
+<!--        <record id="group_openacademy_session" model="res.groups">-->
+<!--            <field name="name">OpenAcademy Group - Session</field>-->
+<!--            <field name="category_id" ref="module_openacademy_category"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+
+<!--        <record id="group_openacademy_course" model="res.groups">-->
+<!--            <field name="name">OpenAcademy Group - Course</field>-->
+<!--            <field name="category_id" ref="module_openacademy_category"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+
+        <record id="group_openacademy_manager" model="res.groups">
+            <field name="name">OpenAcademy Manager</field>
             <field name="category_id" ref="module_openacademy_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
-        <record id="rule_openacademy_session" model="ir.rule">
-            <field name="name">OpenAcademy Rule - Session</field>
-            <field name="model_id" ref="model_openacademy_session"/>
-            <field name="groups" eval="[(4, ref('openacademy.group_openacademy_session'))]"/>
+<!--        <record id="rule_openacademy_session" model="ir.rule">-->
+<!--            <field name="name">OpenAcademy Rule - Session (full)</field>-->
+<!--            <field name="model_id" ref="model_openacademy_session"/>-->
+<!--            <field name="domain_force">[(1, '=', 1)]</field>-->
+<!--            &lt;!&ndash; You can attach this rule to a specific group, Or make it Global &ndash;&gt;-->
+<!--            <field name="groups" eval="[(4, ref('openacademy.group_openacademy_manager'))]"/>-->
+<!--            &lt;!&ndash;<field name="global" eval="1"/> &ndash;&gt;-->
+<!--            <field name="perm_read" eval="1"/>-->
+<!--            <field name="perm_write" eval="1"/>-->
+<!--            <field name="perm_create" eval="1"/>-->
+<!--            <field name="perm_unlink" eval="1"/>-->
+<!--        </record>-->
+
+        <record id="rule_openacademy_course_user" model="ir.rule">
+            <field name="name">OpenAcademy Rule - Course - user.id</field>
+            <field name="model_id" ref="model_openacademy_course"/>
+            <field name="domain_force">[('responsible_id', '=', user.id)]</field>
             <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('openacademy.group_openacademy_manager'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+
+        <record id="rule_openacademy_read" model="ir.rule">
+            <field name="name">OpenAcademy Rule - Course - Read</field>
+            <field name="model_id" ref="model_openacademy_course"/>
+            <field name="domain_force">[(1, '=', 1), ('responsible_id', '!=', False), ('responsible_id', '!=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('openacademy.group_openacademy_manager'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+
+        <record id="openacademy_course_resp" model="ir.rule">
+            <field name="name">OpenAcademy Rule - Course - Without responsible</field>
+            <field name="model_id" ref="model_openacademy_course"/>
+            <field name="domain_force">[('responsible_id', '=', False)]</field>
             <field name="perm_write" eval="1"/>
             <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
             <field name="perm_unlink" eval="1"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('openacademy.group_openacademy_manager'))]"/>
+            <!--<field name="global" eval="1"/> -->
         </record>
 
     </data>
